@@ -1,0 +1,64 @@
+:root {
+    --bg-color: #01082b;
+
+    --CELL-X: 24px;
+    --CELL-Y: 40px;
+
+    --WINDOW-RATIO-X: 0.5;
+    --WINDOW-RATIO-Y: 0.625;
+}
+
+.window {
+    position: absolute;
+    width: calc(var(--CELL-X) * var(--WINDOW-RATIO-X));
+    transform: translate(50%, 35%);
+    height: calc(var(--CELL-Y) * var(--WINDOW-RATIO-Y));
+}
+
+.window[data-brightness="0"] {
+    background: #24140e;
+}
+
+.window[data-brightness="1"] {
+    background: #86522b;
+}
+
+.window[data-brightness="2"] {
+    background: #a27f51;
+}
+
+.window[data-brightness="3"] {
+    background: #cbc08e;
+}
+
+.building {
+    bottom: 0;
+    position: absolute;
+    background: black;
+}
+
+.building::after {
+    content: "";
+    background: var(--bg-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.building[data-layer="2"]::after {
+    opacity: 0.3;
+}
+
+.building[data-layer="3"]::after {
+    opacity: 0.6;
+}
+
+html, body {
+    background: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
