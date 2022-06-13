@@ -1,24 +1,40 @@
 let bg = document.body;
 
-const CELL_X = 24;
-const CELL_Y = 40;
 const N = 20;
 const N_LAYERS = 3;
+
+const CELL_X = 24;
+const CELL_Y = 40;
+
+// building setup
+const MIN_WIDTH = 3;
+const MAX_WIDTH = 5;
+const MIN_HEIGHT = 6;
+const MAX_HEIGHT = 14;
+
+const MAX_X_OFFSET = 4;
 
 const WINDOW_COLORS = 4;
 
 init();
 
 function init() {
+    document.documentElement.style.setProperty("--CELL-X", CELL_X + "px");
+    document.documentElement.style.setProperty("--CELL-Y", CELL_Y + "px");
+
+    draw();
+}
+
+function draw() {
     for (let layer = N_LAYERS; layer > 0; layer--) {
         let xOffset = 0;
 
         for (let i = 0; i < N; i++) {
-            let w = random(5, 2);
-            let h = random(14, 6);
+            let w = random(MAX_WIDTH, MIN_WIDTH);
+            let h = random(MAX_HEIGHT, MIN_HEIGHT);
             bg.append(createBuilding(xOffset, w, h, layer));
 
-            xOffset += w + random(4);
+            xOffset += w + random(MAX_X_OFFSET);
         }
     }
 }
