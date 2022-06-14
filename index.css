@@ -7,8 +7,11 @@
     --WINDOW-REL-WIDTH: 0.5;
     --WINDOW-REL-HEIGHT: 0.625;
 
-    --WINDOW-X-OFFSET: calc(100% * (1 - var(--WINDOW-REL-WIDTH)));
-    --WINDOW-Y-OFFSET: calc(100% * (1 - var(--WINDOW-REL-HEIGHT)));
+    --HALF-X-OFFSET: calc((1 - var(--WINDOW-REL-WIDTH)) / 2);
+    --HALF-Y-OFFSET: calc((1 - var(--WINDOW-REL-HEIGHT)) / 2);
+
+    --WINDOW-X-OFFSET: calc(100% * var(--HALF-X-OFFSET) / var(--WINDOW-REL-WIDTH));
+    --WINDOW-Y-OFFSET: calc(100% * var(--HALF-Y-OFFSET) / var(--WINDOW-REL-HEIGHT));
 }
 
 #timer {
