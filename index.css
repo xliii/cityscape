@@ -11,6 +11,15 @@
     --WINDOW-Y-OFFSET: calc(100% * (1 - var(--WINDOW-REL-HEIGHT)));
 }
 
+#timer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
 .fallingStar {
     position: absolute;
     width: 2px;

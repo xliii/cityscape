@@ -40,6 +40,18 @@ function init() {
     drawBuildings();
     fadeWindows();
     initFallingStars();
+    //initDebug();
+}
+
+function initDebug() {
+    let time = 0;
+
+    setInterval(() => {
+        time++;
+        let windows = document.querySelectorAll(".window").length;
+        let faded = document.querySelectorAll(".window.fade").length;
+        document.querySelector("#timer").innerHTML = time + " | " + faded + "/" + windows;
+    }, 1000);
 }
 
 function initFallingStars() {
@@ -112,12 +124,12 @@ function drawBuildings() {
 function fadeWindows() {
     let windows = document.querySelectorAll(".window");
     //totalTime = totalWindows / batch * interval
-    let interval = Math.floor(TARGET_FADE_TIME / windows.length);
+    let batch = 4;
+
+    let interval = Math.floor(TARGET_FADE_TIME / windows.length * batch);
     console.log("Total windows: " + windows.length);
     console.log("Target duration: " + TARGET_FADE_TIME);
     console.log("Fade interval: " + interval);
-
-    let batch = 4;
 
     let shuffled = [...windows].sort(() => 0.5 - Math.random());
     let pos = 0;
