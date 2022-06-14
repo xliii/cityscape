@@ -21,8 +21,7 @@ const MAX_X_OFFSET = 4;
 const WINDOW_COLORS = 4;
 
 // fade configuration
-const FADE_INTERVAL = 50;
-const FADE_BATCH = 10;
+const TARGET_FADE_TIME = 60000;
 
 // falling star
 const FALLING_STAR_LAYERS = 50;
@@ -111,14 +110,24 @@ function drawBuildings() {
 }
 
 function fadeWindows() {
+    let windows = document.querySelectorAll(".window");
+    //totalTime = totalWindows / batch * interval
+    let interval = Math.floor(TARGET_FADE_TIME / windows.length);
+    console.log("Total windows: " + windows.length);
+    console.log("Target duration: " + TARGET_FADE_TIME);
+    console.log("Fade interval: " + interval);
+
+    let batch = 4;
+
+    let shuffled = [...windows].sort(() => 0.5 - Math.random());
+    let pos = 0;
+
     setInterval(() => {
-        let windows = document.querySelectorAll(".window:not(.fade)");
-        let shuffled = [...windows].sort(() => 0.5 - Math.random());
-        let selected = shuffled.slice(0, FADE_BATCH);
-        selected.forEach(window => {
-            window.classList.add("fade");
-        });
-    }, FADE_INTERVAL);
+        for (let i = pos; i < pos + batch; i++) {
+            shuffled[i]?.classList.add("fade");
+        }
+        pos += batch;
+    }, interval);
 }
 
 function createBuilding(xOffset, w, h, layer) {
