@@ -1,7 +1,8 @@
 let bg = document.body;
 
-const N = 40;
+const N_BUILDINGS_PER_LAYER = 40;
 const N_LAYERS = 3;
+const N_STARS = 100;
 
 const CELL_X = 12;
 const CELL_Y = 20;
@@ -27,19 +28,43 @@ function init() {
     document.documentElement.style.setProperty("--WINDOW-REL-WIDTH", String(WINDOW_REL_WIDTH));
     document.documentElement.style.setProperty("--WINDOW-REL-HEIGHT", String(WINDOW_REL_HEIGHT));
 
-    draw();
+    drawStars();
+    drawBuildings();
 }
 
-function draw() {
+function createStar(x, y) {
+    let s = document.createElement("div");
+    s.classList.add("star");
+    s.dataset.size = random(3);
+
+    s.style.left = x + "px";
+    s.style.top = y + "px";
+    return s;
+}
+
+function drawStars() {
+    for (let i = 0; i < N_STARS; i++) {
+        let x = random(window.innerWidth);
+        let y = random(window.innerHeight);
+
+        bg.append(createStar(x, y));
+    }
+}
+
+function drawBuildings() {
     for (let layer = N_LAYERS; layer > 0; layer--) {
         let xOffset = 0;
 
-        for (let i = 0; i < N; i++) {
+        for (let i = 0; i < N_BUILDINGS_PER_LAYER; i++) {
             let w = random(MAX_WIDTH, MIN_WIDTH);
             let h = random(MAX_HEIGHT, MIN_HEIGHT);
             bg.append(createBuilding(xOffset, w, h, layer));
 
             xOffset += w + random(MAX_X_OFFSET);
+
+            if (xOffset * CELL_X > window.innerWidth) {
+                break;
+            }
         }
     }
 }

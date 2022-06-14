@@ -11,6 +11,23 @@
     --WINDOW-Y-OFFSET: calc(100% * (1 - var(--WINDOW-REL-HEIGHT)));
 }
 
+.star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: #cbc08e;
+}
+
+.star[data-size="1"] {
+    width: 1px;
+    height: 2px;
+}
+
+.star[data-size="2"] {
+    width: 2px;
+    height: 2px;
+}
+
 .window {
     position: absolute;
     width: calc(var(--CELL-X) * var(--WINDOW-REL-WIDTH));
