@@ -4,15 +4,18 @@
     --CELL-X: 24px;
     --CELL-Y: 40px;
 
-    --WINDOW-RATIO-X: 0.5;
-    --WINDOW-RATIO-Y: 0.625;
+    --WINDOW-REL-WIDTH: 0.5;
+    --WINDOW-REL-HEIGHT: 0.625;
+
+    --WINDOW-X-OFFSET: calc(100% * (1 - var(--WINDOW-REL-WIDTH)));
+    --WINDOW-Y-OFFSET: calc(100% * (1 - var(--WINDOW-REL-HEIGHT)));
 }
 
 .window {
     position: absolute;
-    width: calc(var(--CELL-X) * var(--WINDOW-RATIO-X));
-    transform: translate(50%, 35%);
-    height: calc(var(--CELL-Y) * var(--WINDOW-RATIO-Y));
+    width: calc(var(--CELL-X) * var(--WINDOW-REL-WIDTH));
+    transform: translate(var(--WINDOW-X-OFFSET), var(--WINDOW-Y-OFFSET));
+    height: calc(var(--CELL-Y) * var(--WINDOW-REL-HEIGHT));
 }
 
 .window[data-brightness="0"] {
@@ -49,11 +52,11 @@
 }
 
 .building[data-layer="2"]::after {
-    opacity: 0.3;
+    opacity: 0.6;
 }
 
 .building[data-layer="3"]::after {
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 html, body {

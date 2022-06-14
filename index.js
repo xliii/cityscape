@@ -1,10 +1,13 @@
 let bg = document.body;
 
-const N = 20;
+const N = 40;
 const N_LAYERS = 3;
 
-const CELL_X = 24;
-const CELL_Y = 40;
+const CELL_X = 12;
+const CELL_Y = 20;
+
+const WINDOW_REL_WIDTH = 0.25;
+const WINDOW_REL_HEIGHT = 0.325;
 
 // building setup
 const MIN_WIDTH = 3;
@@ -21,6 +24,8 @@ init();
 function init() {
     document.documentElement.style.setProperty("--CELL-X", CELL_X + "px");
     document.documentElement.style.setProperty("--CELL-Y", CELL_Y + "px");
+    document.documentElement.style.setProperty("--WINDOW-REL-WIDTH", String(WINDOW_REL_WIDTH));
+    document.documentElement.style.setProperty("--WINDOW-REL-HEIGHT", String(WINDOW_REL_HEIGHT));
 
     draw();
 }
