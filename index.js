@@ -20,6 +20,10 @@ const MAX_X_OFFSET = 4;
 
 const WINDOW_COLORS = 4;
 
+// fade configuration
+const FADE_INTERVAL = 50;
+const FADE_BATCH = 10;
+
 init();
 
 function init() {
@@ -30,6 +34,7 @@ function init() {
 
     drawStars();
     drawBuildings();
+    fadeWindows();
 }
 
 function createStar(x, y) {
@@ -67,6 +72,17 @@ function drawBuildings() {
             }
         }
     }
+}
+
+function fadeWindows() {
+    setInterval(() => {
+        let windows = document.querySelectorAll(".window:not(.fade)");
+        let shuffled = [...windows].sort(() => 0.5 - Math.random());
+        let selected = shuffled.slice(0, FADE_BATCH);
+        selected.forEach(window => {
+            window.classList.add("fade");
+        });
+    }, FADE_INTERVAL);
 }
 
 function createBuilding(xOffset, w, h, layer) {

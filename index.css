@@ -35,6 +35,11 @@
     height: calc(var(--CELL-Y) * var(--WINDOW-REL-HEIGHT));
 }
 
+.window.fade {
+    transition: 2s;
+    background: #150a0a !important;
+}
+
 .window[data-brightness="0"] {
     background: #24140e;
 }
