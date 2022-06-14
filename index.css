@@ -11,6 +11,28 @@
     --WINDOW-Y-OFFSET: calc(100% * (1 - var(--WINDOW-REL-HEIGHT)));
 }
 
+.fallingStar {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation-name: falling-star;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+    z-index: -10000;
+}
+
+@keyframes falling-star {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-2000px, 2000px);
+    }
+}
+
 .star {
     position: absolute;
     width: 1px;

@@ -24,6 +24,11 @@ const WINDOW_COLORS = 4;
 const FADE_INTERVAL = 50;
 const FADE_BATCH = 10;
 
+// falling star
+const FALLING_STAR_LAYERS = 50;
+const FALLING_STAR_STEP = 2;
+const FALLING_STAR_OPACITY_STEP = 0.03;
+
 init();
 
 function init() {
@@ -35,6 +40,34 @@ function init() {
     drawStars();
     drawBuildings();
     fadeWindows();
+    initFallingStars();
+}
+
+function initFallingStars() {
+    setTimeout(() => {
+        createFallingStar();
+        initFallingStars();
+    }, random(20000, 5000));
+}
+
+function createFallingStar() {
+    let x = random(window.innerWidth);
+    let y = -50;
+
+    let s = document.createElement("div");
+    s.classList.add("fallingStar");
+
+    s.style.left = x + "px";
+    s.style.top = y + "px";
+
+    let boxShadow = [];
+
+    for (let i = 1; i < FALLING_STAR_LAYERS; i++) {
+        boxShadow.push(`${i * FALLING_STAR_STEP}px -${i * FALLING_STAR_STEP}px rgba(255,255,255,${1 - FALLING_STAR_OPACITY_STEP * i})`);
+    }
+
+    s.style.boxShadow = boxShadow.join(',');
+    bg.append(s);
 }
 
 function createStar(x, y) {
