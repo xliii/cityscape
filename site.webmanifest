@@ -1,14 +1,14 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Night City Generator",
+    "short_name": "Night City Generator",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
+            "src": "https://xliii.github.io/night-city-generator/android-chrome-192x192.png?v=1",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png",
+            "src": "https://xliii.github.io/night-city-generator/android-chrome-512x512.png?v=1",
             "sizes": "512x512",
             "type": "image/png"
         }
