@@ -2,7 +2,7 @@ let bg = document.body;
 
 const N_BUILDINGS_PER_LAYER = 40;
 const N_LAYERS = 3;
-const N_STARS = 100;
+const N_STARS = 1000;
 
 const CELL_X = 12;
 const CELL_Y = 20;
@@ -40,7 +40,10 @@ function init() {
 function createStar(x, y) {
     let s = document.createElement("div");
     s.classList.add("star");
+    s.classList.add(Math.random() > 0.5 ? "warm" : "cold");
     s.dataset.size = random(3);
+    s.style.animationDuration = random(5, 2) + "s";
+    s.style.animationDelay = Math.random() * 3 + "s";
 
     s.style.left = x + "px";
     s.style.top = y + "px";
