@@ -1,6 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const type = urlParams.get('type');
 
+let bg = document.querySelector("#bg");
+
 const N_BUILDINGS_PER_LAYER = 40;
 const N_LAYERS = 3;
 const N_STARS = 1000;
@@ -40,11 +42,27 @@ function init(type) {
 
     if (type === "day") {
         drawDay();
+    } else if (type === "evening") {
+        drawEvening();
     } else {
         drawNight();
     }
 
     //initDebug();
+}
+
+function drawEvening() {
+    document.body.classList.add("evening");
+
+    drawSun();
+    drawBuildings();
+}
+
+function drawSun() {
+    let s = document.createElement("div");
+    s.classList.add("sun");
+
+    bg.append(s);
 }
 
 function drawNight() {
@@ -59,9 +77,7 @@ function drawDay() {
     document.body.classList.add("day");
 
     drawBuildings();
-    //sun
     initClouds();
-    //clouds
 }
 
 function initClouds() {
@@ -85,7 +101,7 @@ function createCloud(x, y, duration, delay) {
     c.style.animationDuration = duration + "s";
     c.style.animationDelay = delay + "s";
 
-    document.body.append(c);
+    bg.append(c);
 }
 
 function initDebug() {
@@ -123,7 +139,7 @@ function createFallingStar() {
     }
 
     s.style.boxShadow = boxShadow.join(',');
-    document.body.append(s);
+    bg.append(s);
 }
 
 function createStar(x, y) {
@@ -144,7 +160,7 @@ function drawStars() {
         let x = random(window.innerWidth);
         let y = random(window.innerHeight);
 
-        document.body.append(createStar(x, y));
+        bg.append(createStar(x, y));
     }
 }
 
@@ -155,7 +171,7 @@ function drawBuildings() {
         for (let i = 0; i < N_BUILDINGS_PER_LAYER; i++) {
             let w = random(MAX_WIDTH, MIN_WIDTH);
             let h = random(MAX_HEIGHT, MIN_HEIGHT);
-            document.body.append(createBuilding(xOffset, w, h, layer));
+            bg.append(createBuilding(xOffset, w, h, layer));
 
             xOffset += w + random(MAX_X_OFFSET);
 

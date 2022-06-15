@@ -174,7 +174,6 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: 5s;
-    z-index: -10000;
 }
 
 @keyframes cloud-move {
@@ -219,10 +218,41 @@
 }
 
 body {
-    background: var(--bg-color);
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+#bg {
+    position: absolute;
+    background: var(--bg-color);
+    width: 100%;
+    height: 100%;
+}
+
+body.evening > #bg {
+    background: linear-gradient(#db53d3, #ffa931);
+}
+
+.sun {
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 250px;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: linear-gradient(#ffb32f, #ff9427);
+}
+
+body.evening {
+    --bg-color: #8c5477;
+    --building-color: #180157;
+
+    --window-color-0: #b68663;
+    --window-color-1: #b66f92;
+    --window-color-2: #b65450;
+    --window-color-3: #cb775c;
 }
 
 body.day {
