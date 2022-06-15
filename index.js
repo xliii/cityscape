@@ -19,8 +19,6 @@ const MAX_HEIGHT = 14;
 
 const MAX_X_OFFSET = 4;
 
-const WINDOW_COLORS = 4;
-
 // fade configuration
 const TARGET_FADE_TIME = 60000;
 
@@ -28,6 +26,9 @@ const TARGET_FADE_TIME = 60000;
 const FALLING_STAR_LAYERS = 50;
 const FALLING_STAR_STEP = 2;
 const FALLING_STAR_OPACITY_STEP = 0.03;
+
+// clouds
+const N_CLOUDS = 8;
 
 init(type);
 
@@ -64,11 +65,25 @@ function drawDay() {
 }
 
 function initClouds() {
-    let c = document.createElement("div");
-    c.classList.add("cloud", "cloud1", "medium");
+    for (let i = 0; i < N_CLOUDS; i++) {
+        let x = -200;
+        let y = random(window.innerHeight / 2);
+        let duration = random(40, 25);
+        let delay = random(20);
+        createCloud(x, y, duration, delay);
+    }
+}
 
-    c.style.left = "100px";
-    c.style.top = "100px";
+function createCloud(x, y, duration, delay) {
+    let c = document.createElement("div");
+    c.classList.add("cloud");
+    c.dataset.type = String(random(1));
+    c.dataset.size = String(random(2));
+
+    c.style.left = x + "px";
+    c.style.top = y + "px";
+    c.style.animationDuration = duration + "s";
+    c.style.animationDelay = delay + "s";
 
     document.body.append(c);
 }
@@ -115,7 +130,7 @@ function createStar(x, y) {
     let s = document.createElement("div");
     s.classList.add("star");
     s.classList.add(Math.random() > 0.5 ? "warm" : "cold");
-    s.dataset.size = random(3);
+    s.dataset.size = String(random(3));
     s.style.animationDuration = random(5, 2) + "s";
     s.style.animationDelay = Math.random() * 3 + "s";
 
@@ -193,7 +208,7 @@ function createBuilding(xOffset, w, h, layer) {
 }
 
 function random(to, from = 0) {
-    return Math.floor(Math.random() * to) + from;
+    return Math.floor(Math.round(Math.random() * to) + from);
 }
 
 function createWindow(x, y) {
@@ -202,7 +217,7 @@ function createWindow(x, y) {
     w.style.top = y + "px";
     w.style.left = x + "px";
 
-    w.dataset.brightness = random(WINDOW_COLORS);
+    w.dataset.brightness = String(random(3));
 
     return w;
 }
