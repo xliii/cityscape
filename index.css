@@ -1,6 +1,13 @@
 :root {
     --bg-color: #01082b;
 
+    --building-color: black;
+
+    --window-color-0: #24140e;
+    --window-color-1: #86522b;
+    --window-color-2: #a27f51;
+    --window-color-3: #cbc08e;
+
     --CELL-X: 24px;
     --CELL-Y: 40px;
 
@@ -105,25 +112,25 @@
 }
 
 .window[data-brightness="0"] {
-    background: #24140e;
+    background: var(--window-color-0);
 }
 
 .window[data-brightness="1"] {
-    background: #86522b;
+    background: var(--window-color-1);
 }
 
 .window[data-brightness="2"] {
-    background: #a27f51;
+    background: var(--window-color-2);
 }
 
 .window[data-brightness="3"] {
-    background: #cbc08e;
+    background: var(--window-color-3);
 }
 
 .building {
     bottom: 0;
     position: absolute;
-    background: black;
+    background: var(--building-color);
 }
 
 .building::after {
@@ -145,9 +152,67 @@
     opacity: 0.9;
 }
 
-html, body {
+.cloud.small {
+    transform: scale(0.4);
+}
+
+.cloud.medium {
+    transform: scale(0.7);
+}
+
+.cloud {
+    border-radius: 75px;
+    position: absolute;
+    background: white;
+    height: 50px;
+    width: 150px;
+    box-shadow: inset -8px -8px 0 0 #f7e7eb;
+}
+
+.cloud:before {
+    content: "";
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    left: 25px;
+    top: -25px;
+}
+
+.cloud.cloud1:before {
+    left: 70px;
+}
+
+.cloud.cloud1:after {
+    left: 25px;
+}
+
+.cloud:after {
+    content: "";
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    left: 50px;
+    top: -35px;
+    z-index: 1;
+}
+
+body {
     background: var(--bg-color);
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+body.day {
+    --bg-color: #55bbe4;
+    --building-color: #425664;
+
+    --window-color-0: #4595b6;
+    --window-color-1: #3faab6;
+    --window-color-2: #39a5b6;
+    --window-color-3: #50cbcb;
 }

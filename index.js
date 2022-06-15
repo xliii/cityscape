@@ -1,4 +1,5 @@
-let bg = document.body;
+const urlParams = new URLSearchParams(window.location.search);
+const type = urlParams.get('type');
 
 const N_BUILDINGS_PER_LAYER = 40;
 const N_LAYERS = 3;
@@ -11,7 +12,7 @@ const WINDOW_REL_WIDTH = 0.25;
 const WINDOW_REL_HEIGHT = 0.325;
 
 // building setup
-const MIN_WIDTH = 3;
+const MIN_WIDTH = 4;
 const MAX_WIDTH = 5;
 const MIN_HEIGHT = 6;
 const MAX_HEIGHT = 14;
@@ -28,19 +29,48 @@ const FALLING_STAR_LAYERS = 50;
 const FALLING_STAR_STEP = 2;
 const FALLING_STAR_OPACITY_STEP = 0.03;
 
-init();
+init(type);
 
-function init() {
+function init(type) {
     document.documentElement.style.setProperty("--CELL-X", CELL_X + "px");
     document.documentElement.style.setProperty("--CELL-Y", CELL_Y + "px");
     document.documentElement.style.setProperty("--WINDOW-REL-WIDTH", String(WINDOW_REL_WIDTH));
     document.documentElement.style.setProperty("--WINDOW-REL-HEIGHT", String(WINDOW_REL_HEIGHT));
 
+    if (type === "day") {
+        drawDay();
+    } else {
+        drawNight();
+    }
+
+    //initDebug();
+}
+
+function drawNight() {
     drawStars();
     drawBuildings();
-    fadeWindows();
     initFallingStars();
-    //initDebug();
+
+    fadeWindows();
+}
+
+function drawDay() {
+    document.body.classList.add("day");
+
+    drawBuildings();
+    //sun
+    initClouds();
+    //clouds
+}
+
+function initClouds() {
+    let c = document.createElement("div");
+    c.classList.add("cloud", "cloud1", "medium");
+
+    c.style.left = "100px";
+    c.style.top = "100px";
+
+    document.body.append(c);
 }
 
 function initDebug() {
@@ -78,7 +108,7 @@ function createFallingStar() {
     }
 
     s.style.boxShadow = boxShadow.join(',');
-    bg.append(s);
+    document.body.append(s);
 }
 
 function createStar(x, y) {
@@ -99,7 +129,7 @@ function drawStars() {
         let x = random(window.innerWidth);
         let y = random(window.innerHeight);
 
-        bg.append(createStar(x, y));
+        document.body.append(createStar(x, y));
     }
 }
 
@@ -110,7 +140,7 @@ function drawBuildings() {
         for (let i = 0; i < N_BUILDINGS_PER_LAYER; i++) {
             let w = random(MAX_WIDTH, MIN_WIDTH);
             let h = random(MAX_HEIGHT, MIN_HEIGHT);
-            bg.append(createBuilding(xOffset, w, h, layer));
+            document.body.append(createBuilding(xOffset, w, h, layer));
 
             xOffset += w + random(MAX_X_OFFSET);
 
