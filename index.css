@@ -152,21 +152,39 @@
     opacity: 0.9;
 }
 
-.cloud.small {
-    transform: scale(0.4);
+.cloud[data-size="0"] {
+    --cloud-size: 0.4;
 }
 
-.cloud.medium {
-    transform: scale(0.7);
+.cloud[data-size="1"] {
+    --cloud-size: 0.7;
 }
 
 .cloud {
+    --cloud-size: 1;
+
     border-radius: 75px;
     position: absolute;
     background: white;
+    transform: scale(var(--cloud-size));
     height: 50px;
     width: 150px;
     box-shadow: inset -8px -8px 0 0 #f7e7eb;
+    animation-name: cloud-move;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+    z-index: -10000;
+}
+
+@keyframes cloud-move {
+    from {
+        transform: translateX(0) scale(var(--cloud-size));
+    }
+
+    to {
+        transform: translateX(2500px) scale(var(--cloud-size));
+    }
 }
 
 .cloud:before {
@@ -180,11 +198,11 @@
     top: -25px;
 }
 
-.cloud.cloud1:before {
+.cloud[data-type="1"]:before {
     left: 70px;
 }
 
-.cloud.cloud1:after {
+.cloud[data-type="1"]:after {
     left: 25px;
 }
 
